@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Cherub Library 🌸</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🌸</div>
+                <div class="logo-text">
+                    <h1>Cherub Library</h1>
+                    <p>Save books you love ♡</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">🏠 Home</a>
+                <a href="#books" class="nav-link">📚 Books</a>
+                <a href="login.html" class="nav-link">🔑 Login</a>
+                <a href="signup.html" class="nav-link">✨ Sign Up</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="sanrio-decoration">
+                        <span class="floating-icon">🎀</span>
+                        <span class="floating-icon">💖</span>
+                        <span class="floating-icon">🌟</span>
+                    </div>
+                    <div class="login-container">
+                        <div class="login-header">
+                            <h1>Welcome Back! 💖</h1>
+                            <p>Sign in to your magical library</p>
+                        </div>
+                        <div id="login-options" class="login-options">
+                            <a href="student-login.html" class="login-card student-card elegant-btn">
+                                <div class="card-icon">🎓</div>
+                                <h3>Student Portal</h3>
+                                <p>Access your reading collection</p>
+                                <div class="card-arrow">→</div>
+                            </a>
+                            <a href="admin-login.html" class="login-card admin-card elegant-btn">
+                                <div class="card-icon">👑</div>
+                                <h3>Admin Portal</h3>
+                                <p>Manage library system</p>
+                                <div class="card-arrow">→</div>
+                            </a>
+                        </div>
+                        <!-- Student Login Form -->
+                        <div id="student-form" class="login-form hidden">
+                            <div class="form-header">
+                                <button class="back-btn" onclick="hideLoginForms()">← Back</button>
+                                <h2>🎓 Student Login</h2>
+                            </div>
+                            <form onsubmit="handleStudentLogin(event)">
+                                <div class="input-group">
+                                    <label for="student-email">📧 Email</label>
+                                    <input type="email" id="student-email" required placeholder="Enter your email">
+                                </div>
+                                <div class="input-group">
+                                    <label for="student-password">🔒 Password</label>
+                                    <input type="password" id="student-password" required placeholder="Enter your password">
+                                </div>
+                                <button type="submit" class="btn btn-student">Sign In as Student 🌸</button>
+                            </form>
+                        </div>
+                        <!-- Admin Login Form -->
+                        <div id="admin-form" class="login-form hidden">
+                            <div class="form-header">
+                                <button class="back-btn" onclick="hideLoginForms()">← Back</button>
+                                <h2>👑 Admin Login</h2>
+                            </div>
+                            <form onsubmit="handleAdminLogin(event)">
+                                <div class="input-group">
+                                    <label for="admin-email">📧 Admin Email</label>
+                                    <input type="email" id="admin-email" required placeholder="Enter admin email">
+                                </div>
+                                <div class="input-group">
+                                    <label for="admin-password">🔒 Admin Password</label>
+                                    <input type="password" id="admin-password" required placeholder="Enter admin password">
+                                </div>
+                                <button type="submit" class="btn btn-admin">Sign In as Admin ✨</button>
+                            </form>
+                        </div>
+                        <div class="login-card-footer" style="text-align:center; margin-top:2rem;">
+                            <div class="login-divider">
+                                <span class="login-divider-text">New to our library?</span>
+                            </div>
+                            <a href="signup.html" class="login-link" style="color:#ff1493; font-weight:700; text-decoration:none;">Create an account 💫</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-star star-1">⭐</div>
+            <div class="floating-star star-2">✨</div>
+            <div class="floating-heart heart-1">💕</div>
+            <div class="floating-heart heart-2">💖</div>
+        </div>
+    </div>
+
+    <script>
+        function showStudentLogin() {
+            document.getElementById('login-options').classList.add('hidden');
+            document.getElementById('student-form').classList.remove('hidden');
+        }
+        function showAdminLogin() {
+            document.getElementById('login-options').classList.add('hidden');
+            document.getElementById('admin-form').classList.remove('hidden');
+        }
+        function hideLoginForms() {
+            document.getElementById('login-options').classList.remove('hidden');
+            document.getElementById('student-form').classList.add('hidden');
+            document.getElementById('admin-form').classList.add('hidden');
+        }
+        function handleStudentLogin(event) {
+            event.preventDefault();
+            window.location.href = 'student-dashboard.html';
+        }
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            window.location.href = 'admin-dashboard.html';
+        }
+
+        // Floating elements follow cursor on hover
+        document.querySelectorAll('.floating-star, .floating-heart').forEach(function(el) {
+            el.addEventListener('mouseenter', function() {
+                el.style.transition = 'transform 0.2s';
+                el.style.transform = 'scale(1.5) rotate(10deg)';
+            });
+            el.addEventListener('mouseleave', function() {
+                el.style.transform = '';
+            });
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            document.querySelectorAll('.floating-star, .floating-heart').forEach(function(el) {
+                var rect = el.getBoundingClientRect();
+                var dx = e.clientX - (rect.left + rect.width/2);
+                var dy = e.clientY - (rect.top + rect.height/2);
+                var dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 100) {
+                    el.style.transform = 'translate(' + dx/4 + 'px, ' + dy/4 + 'px) scale(1.2)';
+                } else {
+                    el.style.transform = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
