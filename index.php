@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherub Library- Save Your Books</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🌸</div>
+                <div class="logo-text">
+                    <h1>Cherub Library</h1>
+                    <p>Save books you love ♡</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="index.php" class="nav-link active">🏠 Home</a>
+                <a href="#books" class="nav-link">📚 Books</a>
+                <a href="login.php" class="nav-link">🔑 Login</a>
+                <a href="signup.php" class="nav-link">✨ Sign Up</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="sanrio-decoration">
+                        <span class="floating-icon">🎀</span>
+                        <span class="floating-icon">💖</span>
+                        <span class="floating-icon">🌟</span>
+                    </div>
+                    
+                    <h2 class="hero-title">
+                        <span class="highlight">Save Any Books You'd Like Here ♡</span>
+                    </h2>
+                    
+                </div>
+            </section>
+
+    </main>
+    </div>
+</body>
+</html>

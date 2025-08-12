@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Cherub Library</title>
+    <link rel="stylesheet" href="admin-login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🌸</div>
+                <div class="logo-text">
+                    <h1>Cherub Library</h1>
+                    <p>Save books you love ♡</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="#books" class="nav-link">📚 Books</a>
+                <a href="login.html" class="nav-link">🔑 Login</a>
+                <a href="signup.html" class="nav-link">✨ Sign Up</a>
+            </nav>
+        </header>
+        <main class="main-content">
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="floating-card admin-card">
+                        <h2>👑 Admin Login</h2>
+                        <form onsubmit="handleAdminLogin(event)">
+                            <div class="input-group">
+                                <label for="admin-email">📧 Admin Email</label>
+                                <input type="email" id="admin-email" required placeholder="Enter admin email">
+                            </div>
+                            <div class="input-group">
+                                <label for="admin-password">🔒 Admin Password</label>
+                                <input type="password" id="admin-password" required placeholder="Enter admin password">
+                            </div>
+                            <button type="submit" class="btn btn-admin">Sign In as Admin ✨</button>
+                        </form>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                        </form>
+                        <button class="back-btn" onclick="window.location.href='login.html'">← Back</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            window.location.href = 'admin-dashboard.html';
+        }
+    </script>
+</body>
+</html>
