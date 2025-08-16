@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["student-login"])) {
     } else {
         $sql = "SELECT * FROM student WHERE fullname='$fullname' AND `confirm password`='$confirm_password'";
         $result = mysqli_query($conn, $sql);
-
         if (mysqli_num_rows($result) == 1) {
             echo "<script type='text/javascript'>alert('Login successful!'); window.location.href='books.php';</script>";
             exit;

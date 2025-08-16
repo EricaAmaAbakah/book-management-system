@@ -1,18 +1,16 @@
-<?php
-session_start();
-$isLoggedIn = isset($_SESSION['student_fullname']);
-?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Serenity Library - Books</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Cherub Library - Books</title>
+  <link rel="stylesheet" href="books-header.css">
   <link rel="stylesheet" href="books.css">
 </head>
-<body style="overflow-y:auto;">
-  <div class="container books-page gradient-bg" style="min-height:100vh;">
+<body class="books-header-bg">
+  <div class="container">
     <header class="header">
       <div class="logo">
         <div class="logo-icon">🌸</div>
@@ -28,449 +26,248 @@ $isLoggedIn = isset($_SESSION['student_fullname']);
         <a href="signup.php" class="nav-link">✨ Sign Up</a>
       </nav>
     </header>
-
     <div class="floating-tabs-container">
       <div class="floating-tabs">
-        <button class="tab-button" id="libraryTab" onclick="showTab('library')">
-          <span class="tab-icon">📚</span>
-          <span class="tab-text">Access Your Library</span>
-        </button>
-        <button class="tab-button" id="addBookTab" onclick="showTab('addBook')">
-          <span class="tab-icon">➕</span>
+        <a href="book-management.php" class="tab-button" id="addBookTab">
+          <span class="tab-icon">✨</span>
           <span class="tab-text">Add New Book</span>
-        </button>
+        </a>
       </div>
     </div>
+    <?php
+    require_once 'connection.php';
+    $books = [];
+    $result = $conn->query("SELECT * FROM book ORDER BY id DESC");
+    while ($row = $result->fetch_assoc()) {
+        $books[] = $row;
+    }
+    ?>
     <main class="books-main-content">
-      <main class="books-main-content">
-        <div class="content-wrapper">
-          <div id="librarySection">
-            <?php 
-            $books = [
-              [
-                'id' => 1,
-                'title' => 'Kawaii Love Story',
-                'author' => 'Sakura Tanaka',
-                'genre' => 'Romance',
-                'year' => 2023,
-                'image' => '/cute-pink-book-cover.png',
-                'link' => 'https://example.com/kawaii-love',
-                'rating' => 4.8,
-              ],
-              [
-                'id' => 2,
-                'title' => 'Ocean Dreams',
-                'author' => 'Marina Blue',
-                'genre' => 'Fantasy',
-                'year' => 2022,
-                'image' => '/blue-ocean-fantasy-book.png',
-                'link' => 'https://example.com/ocean-dreams',
-                'rating' => 4.9,
-              ],
-              [
-                'id' => 3,
-                'title' => 'Sunny Adventures',
-                'author' => 'Ray Sunshine',
-                'genre' => 'Adventure',
-                'year' => 2024,
-                'image' => '/yellow-sunny-adventure-book.png',
-                'link' => 'https://example.com/sunny-adventures',
-                'rating' => 4.7,
-              ],
-              [
-                'id' => 4,
-                'title' => 'Magical Forest',
-                'author' => 'Luna Green',
-                'genre' => 'Fantasy',
-                'year' => 2021,
-                'image' => '/green-magical-forest-book.png',
-                'link' => 'https://example.com/magical-forest',
-                'rating' => 4.6,
-              ],
-              [
-                'id' => 5,
-                'title' => 'City Lights',
-                'author' => 'Neon Purple',
-                'genre' => 'Drama',
-                'year' => 2023,
-                'image' => '/purple-city-lights-book.png',
-                'link' => 'https://example.com/city-lights',
-                'rating' => 4.5,
-              ],
-              [
-                'id' => 6,
-                'title' => 'Cozy Café Tales',
-                'author' => 'Mocha Brown',
-                'genre' => 'Comedy',
-                'year' => 2022,
-                'image' => '/cozy-brown-cafe-book.png',
-                'link' => 'https://example.com/cozy-cafe',
-                'rating' => 4.4,
-              ],
-            ];
-            ?>
-            <div class="library-controls">
-              <div class="search-section">
-                <div class="search-container">
-                  <div class="search-icon">🔍</div>
-                  <input type="text" placeholder="Search by title or author..." class="search-input" />
-                </div>
-              </div>
-              <div class="filters-section">
-                <div class="filter-group">
-                  <label class="filter-label">Genre</label>
-                  <select class="filter-select">
-                    <option>All</option>
-                    <option>Romance</option>
-                    <option>Fantasy</option>
-                    <option>Adventure</option>
-                    <option>Slice of Life</option>
-                  </select>
-                </div>
-                <div class="filter-group">
-                  <label class="filter-label">Year</label>
-                  <select class="filter-select">
-                    <option>All</option>
-                    <option>2024</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                  </select>
-                </div>
-              </div>
+      <div class="content-wrapper">
+        <div class="books-display">
+          <div class="section-header">
+            <h2>Your Kawaii Collection ♡</h2>
+            <div class="book-count">
+              <span class="count-number"><?php echo count($books); ?></span>
+              <span class="count-text">books found</span>
             </div>
-
-            <div class="section-header">
-              <h2>Your Kawaii Collection ♡</h2>
-              <div class="book-count">
-                <span class="count-number"><?php echo count($books); ?></span>
-                <span class="count-text">books found</span>
+          </div>
+          <div class="books-grid">
+            <?php if (count($books) === 0): ?>
+              <div class="no-books-found">
+                <div class="no-books-icon">📚</div>
+                <h3>No books found</h3>
+                <p>Try adding a new book or adjusting your filters!</p>
               </div>
-            </div>
-            <div class="books-grid">
+            <?php else: ?>
               <?php foreach ($books as $book): ?>
-              <div class="book-card book-card-tiny">
-                <div class="book-cover-container">
-                  <img src="<?php echo $book['image']; ?>" alt="<?php echo htmlspecialchars($book['title']); ?>" class="book-cover" />
-                  <div class="book-overlay">
-                    <button class="view-details-button" onclick='showDetails("<?php echo addslashes($book['title']); ?>","<?php echo addslashes($book['author']); ?>","<?php echo addslashes($book['genre']); ?>","<?php echo $book['year']; ?>","<?php echo addslashes($book['image']); ?>","<?php echo addslashes($book['link']); ?>")'>View Details</button>
+                <?php
+                  $bookTitle = isset($book['title']) ? $book['title'] : '';
+                  $bookAuthor = isset($book['author']) ? $book['author'] : '';
+                  $bookGenre = isset($book['genre']) ? $book['genre'] : '';
+                  $bookYear = isset($book['year']) ? $book['year'] : '';
+                  $bookImage = !empty($book['image']) ? $book['image'] : '/placeholder.svg';
+                  $bookRating = isset($book['rating']) ? $book['rating'] : '';
+                  $bookLink = isset($book['link']) ? $book['link'] : '#';
+                ?>
+                <div class="book-card book-card-large" style="cursor:pointer;box-shadow:0 8px 32px rgba(255,107,157,0.12);border-radius:20px;padding:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem;transition:all 0.3s;" onclick="showBookModal('<?php echo addslashes($bookTitle); ?>','<?php echo addslashes($bookAuthor); ?>','<?php echo addslashes($bookGenre); ?>','<?php echo addslashes($bookYear); ?>','<?php echo addslashes($bookImage); ?>','<?php echo addslashes($bookRating); ?>','<?php echo addslashes($bookLink); ?>')">
+                  <div class="book-cover-container" style="margin-bottom:1rem;">
+                    <img src="<?php echo htmlspecialchars($bookImage); ?>" alt="<?php echo htmlspecialchars($bookTitle); ?>" class="book-cover" style="width:120px;height:160px;object-fit:cover;border-radius:12px;box-shadow:0 4px 20px rgba(255,107,157,0.15);">
+                  </div>
+                  <div class="book-info" style="text-align:center;">
+                    <h3 class="book-title" style="font-size:1.3rem;color:#ff6b9d;margin-bottom:0.5rem;"><?php echo htmlspecialchars($bookTitle); ?></h3>
+                    <p class="book-author" style="color:#666;margin-bottom:0.5rem;">by <?php echo htmlspecialchars($bookAuthor); ?></p>
+                    <span class="book-genre" style="background:rgba(255,107,157,0.1);color:#ff6b9d;padding:0.25rem 0.5rem;border-radius:8px;font-size:0.9rem;font-weight:600;margin-right:0.5rem;"><?php echo htmlspecialchars($bookGenre); ?></span>
+                    <span class="book-year" style="background:rgba(107,157,255,0.1);color:#6b9dff;padding:0.25rem 0.5rem;border-radius:8px;font-size:0.9rem;font-weight:600;"><?php echo htmlspecialchars($bookYear); ?></span>
+                    <span class="book-rating" style="font-size:1.1rem;">⭐ <?php echo htmlspecialchars($bookRating); ?></span>
+                    <a href="<?php echo htmlspecialchars($bookLink); ?>" target="_blank" class="read-now-btn" style="display:inline-block;background:#4ade80;color:#fff;padding:0.5rem 1.5rem;border-radius:12px;text-decoration:none;font-weight:600;margin-top:0.5rem;">📖 Read Now</a>
                   </div>
                 </div>
-                <div class="book-info">
-                  <h3 class="book-title"><?php echo htmlspecialchars($book['title']); ?></h3>
-                  <p class="book-author">by <?php echo htmlspecialchars($book['author']); ?></p>
-                  <span class="book-genre"><?php echo htmlspecialchars($book['genre']); ?></span>
-                </div>
-              </div>
               <?php endforeach; ?>
-            </div>
-
-            <!-- Book Details Modal -->
-            <div id="bookDetailsModal" class="book-details-overlay" style="display:none;">
-              <div class="book-details-modal">
-                <button class="modal-close-btn" onclick="closeDetails()">✕</button>
-                <div class="modal-content">
-                  <div class="modal-book-cover">
-                    <img id="modalBookImage" src="" alt="Book Cover" />
-                  </div>
-                  <div class="modal-book-info">
-                    <div class="modal-header">
-                      <h2 class="modal-title" id="modalBookTitle"></h2>
-                    </div>
-                    <div class="modal-author">
-                      <span class="author-label">✍️ Author:</span>
-                      <span class="author-name" id="modalBookAuthor"></span>
-                    </div>
-                    <div class="modal-genre">
-                      <span class="genre-label">Genre:</span>
-                      <span class="genre-value" id="modalBookGenre"></span>
-                    </div>
-                    <div class="modal-year">
-                      <span class="year-label">Year:</span>
-                      <span class="year-value" id="modalBookYear"></span>
-                    </div>
-                    <div class="modal-link">
-                      <a id="modalBookLink" href="#" target="_blank">Read More</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="addBookSection" style="display:none;">
-            <?php 
-            $books = [
-              [
-                'id' => 1,
-                'title' => 'Kawaii Love Story',
-                'author' => 'Sakura Tanaka',
-                'genre' => 'Romance',
-                'year' => 2023,
-                'image' => '/cute-pink-book-cover.png',
-                'link' => 'https://example.com/kawaii-love',
-                'rating' => 4.8,
-              ],
-              [
-                'id' => 2,
-                'title' => 'Ocean Dreams',
-                'author' => 'Marina Blue',
-                'genre' => 'Fantasy',
-                'year' => 2022,
-                'image' => '/blue-ocean-fantasy-book.png',
-                'link' => 'https://example.com/ocean-dreams',
-                'rating' => 4.9,
-              ],
-              [
-                'id' => 3,
-                'title' => 'Sunny Adventures',
-                'author' => 'Ray Sunshine',
-                'genre' => 'Adventure',
-                'year' => 2024,
-                'image' => '/yellow-sunny-adventure-book.png',
-                'link' => 'https://example.com/sunny-adventures',
-                'rating' => 4.7,
-              ],
-              [
-                'id' => 4,
-                'title' => 'Magical Forest',
-                'author' => 'Luna Green',
-                'genre' => 'Fantasy',
-                'year' => 2021,
-                'image' => '/green-magical-forest-book.png',
-                'link' => 'https://example.com/magical-forest',
-                'rating' => 4.6,
-              ],
-              [
-                'id' => 5,
-                'title' => 'City Lights',
-                'author' => 'Neon Purple',
-                'genre' => 'Drama',
-                'year' => 2023,
-                'image' => '/purple-city-lights-book.png',
-                'link' => 'https://example.com/city-lights',
-                'rating' => 4.5,
-              ],
-              [
-                'id' => 6,
-                'title' => 'Cozy Café Tales',
-                'author' => 'Mocha Brown',
-                'genre' => 'Comedy',
-                'year' => 2022,
-                'image' => '/cozy-brown-cafe-book.png',
-                'link' => 'https://example.com/cozy-cafe',
-                'rating' => 4.4,
-              ],
-            ];
-            $genreOptions = ["Romance", "Fantasy", "Mystery", "Sci-Fi", "Adventure", "Drama", "Comedy"];
-            ?>
-            <div class="book-management-view">
-              <div class="management-header">
-                <div class="header-info">
-                  <h2>Manage Your Books ✨</h2>
-                  <p>Add, edit, or remove books from your collection</p>
-                </div>
-                <button class="add-book-btn" onclick="document.getElementById('addBookModal').style.display='flex'">
-                  <span class="btn-icon">➕</span>
-                  <span class="btn-text">Add New Book</span>
-                </button>
-              </div>
-              <!-- Add/Edit Book Modal -->
-              <div id="addBookModal" class="book-form-overlay" style="display:none;">
-                <div class="book-form-container">
-                  <div class="form-header">
-                    <h3>Add New Book ✨</h3>
-                    <button class="close-btn" onclick="document.getElementById('addBookModal').style.display='none'">✕</button>
-                  </div>
-                  <form class="book-form">
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label>📖 Book Title</label>
-                        <input type="text" placeholder="Enter book title..." required />
-                      </div>
-                      <div class="form-group">
-                        <label>✍️ Author</label>
-                        <input type="text" placeholder="Enter author name..." required />
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="form-group">
-                        <label>📚 Genre</label>
-                        <select>
-                          <?php foreach ($genreOptions as $genre): ?>
-                            <option><?php echo $genre; ?></option>
-                          <?php endforeach; ?>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>📅 Year Published</label>
-                        <input type="number" min="1000" max="2035" required />
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>🖼️ Book Cover Image URL</label>
-                      <input type="url" placeholder="https://example.com/book-cover.jpg" />
-                    </div>
-                    <div class="form-group">
-                      <label>🔗 Book Link</label>
-                      <input type="url" placeholder="https://example.com/read-book" required />
-                    </div>
-                    <div class="form-group">
-                      <label>⭐ Rating (1-5)</label>
-                      <input type="number" min="1" max="5" step="0.1" />
-                    </div>
-                    <div class="form-actions">
-                      <button type="button" class="cancel-btn" onclick="document.getElementById('addBookModal').style.display='none'">Cancel</button>
-                      <button type="submit" class="submit-btn">Add Book ✨</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div class="books-management-section">
-                <div class="section-header">
-                  <h3>Your Book Collection</h3>
-                  <div class="collection-count">
-                    <span class="count-number"><?php echo count($books); ?></span>
-                    <span class="count-text">books total</span>
-                  </div>
-                </div>
-                <div class="management-books-grid">
-                  <?php foreach ($books as $book): ?>
-                  <div class="management-book-card">
-                    <div class="book-cover-small">
-                      <img src="<?php echo $book['image']; ?>" alt="<?php echo htmlspecialchars($book['title']); ?>" />
-                    </div>
-                    <div class="book-details">
-                      <h4><?php echo htmlspecialchars($book['title']); ?></h4>
-                      <p>by <?php echo htmlspecialchars($book['author']); ?></p>
-                      <div class="book-meta-small">
-                        <span><?php echo htmlspecialchars($book['genre']); ?></span>
-                        <span><?php echo $book['year']; ?></span>
-                        <span>⭐ <?php echo $book['rating']; ?></span>
-                      </div>
-                    </div>
-                    <div class="book-actions">
-                      <button class="edit-btn" onclick="editBook(<?php echo htmlspecialchars(json_encode($book)); ?>)">✏️ Edit</button>
-                      <button class="delete-btn">🗑️ Delete</button>
-                    </div>
-                  </div>
-                  <?php endforeach; ?>
-                </div>
-              </div>
-            </div>
+            <?php endif; ?>
           </div>
         </div>
-      </main>
-<script>
-function showTab(tab) {
-  document.getElementById('librarySection').style.display = tab === 'library' ? 'block' : 'none';
-  document.getElementById('addBookSection').style.display = tab === 'addBook' ? 'block' : 'none';
-  document.getElementById('libraryTab').classList.toggle('active', tab === 'library');
-  document.getElementById('addBookTab').classList.toggle('active', tab === 'addBook');
-}
-// Default to library tab
-showTab('library');
-
-function editBook(book) {
-  document.getElementById('addBookModal').style.display = 'flex';
-  var form = document.querySelector('#addBookModal .book-form');
-  if (!form) return;
-  form.querySelector('input[placeholder="Enter book title..."]').value = book.title;
-  form.querySelector('input[placeholder="Enter author name..."]').value = book.author;
-  form.querySelector('select').value = book.genre;
-  form.querySelector('input[type="number"]').value = book.year;
-  form.querySelector('input[placeholder*="book-cover"]').value = book.image;
-  form.querySelector('input[placeholder*="read-book"]').value = book.link;
-  var ratingInput = form.querySelector('input[placeholder*="Rating"], input[type="number"][step]');
-  if (ratingInput) ratingInput.value = book.rating;
-}
-</script>
-        <!-- Book Management Section (Add/Edit/Delete) -->
-        <?php if ($isLoggedIn): ?>
-        <div class="book-management-view">
-          <div class="management-header">
-            <div class="header-info">
-              <h2>Manage Your Books ✨</h2>
-              <p>Add, edit, or remove books from your collection</p>
-            </div>
-            <button class="add-book-btn" onclick="document.getElementById('addBookModal').style.display='flex'">
-              <span class="btn-icon">➕</span>
-              <span class="btn-text">Add New Book</span>
-            </button>
-          </div>
-          <!-- Add/Edit Book Modal -->
-          <div id="addBookModal" class="book-form-overlay" style="display:none;">
-            <div class="book-form-container">
-              <div class="form-header">
-                <h3>Add New Book ✨</h3>
-                <button class="close-btn" onclick="document.getElementById('addBookModal').style.display='none'">✕</button>
-              </div>
-              <form class="book-form">
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>📖 Book Title</label>
-                    <input type="text" placeholder="Enter book title..." required />
-                  </div>
-                  <div class="form-group">
-                    <label>✍️ Author</label>
-                    <input type="text" placeholder="Enter author name..." required />
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label>📚 Genre</label>
-                    <select>
-                      <option>Romance</option>
-                      <option>Fantasy</option>
-                      <option>Adventure</option>
-                      <option>Slice of Life</option>
-                      <option>Mystery</option>
-                      <option>Sci-Fi</option>
-                      <option>Horror</option>
-                      <option>Comedy</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label>📅 Year Published</label>
-                    <input type="number" min="1000" max="2035" required />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label>🖼️ Book Cover Image URL</label>
-                  <input type="url" placeholder="https://example.com/book-cover.jpg" />
-                </div>
-                <div class="form-group">
-                  <label>🔗 Book Link</label>
-                  <input type="url" placeholder="https://example.com/read-book" required />
-                </div>
-                <div class="form-group">
-                  <label>⭐ Rating (1-5)</label>
-                  <input type="number" min="1" max="5" step="0.1" />
-                </div>
-                <div class="form-actions">
-                  <button type="button" class="cancel-btn" onclick="document.getElementById('addBookModal').style.display='none'">Cancel</button>
-                  <button type="submit" class="submit-btn">Add Book ✨</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-        <?php endif; ?>
       </div>
     </main>
   </div>
+  <!-- Book Details Modal -->
+  <div id="bookDetailsModal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+    <div id="bookDetailsContent" style="background:#fff;padding:2rem 2.5rem;border-radius:20px;max-width:400px;width:90vw;box-shadow:0 8px 40px rgba(0,0,0,0.2);position:relative;">
+      <button onclick="closeBookModal()" style="position:absolute;top:1rem;right:1rem;background:#ff6b9d;color:#fff;border:none;border-radius:50%;width:2rem;height:2rem;font-size:1.2rem;cursor:pointer;">✕</button>
+      <div id="modalBookImage" style="text-align:center;margin-bottom:1rem;"></div>
+      <h2 id="modalBookTitle" style="color:#ff6b9d;margin-bottom:0.5rem;"></h2>
+      <p id="modalBookAuthor" style="color:#666;margin-bottom:0.5rem;"></p>
+      <div style="margin-bottom:0.5rem;"><span id="modalBookGenre" style="background:rgba(255,107,157,0.1);color:#ff6b9d;padding:0.25rem 0.5rem;border-radius:8px;font-size:0.9rem;font-weight:600;margin-right:0.5rem;"></span><span id="modalBookYear" style="background:rgba(107,157,255,0.1);color:#6b9dff;padding:0.25rem 0.5rem;border-radius:8px;font-size:0.9rem;font-weight:600;"></span></div>
+      <div style="margin-bottom:1rem;font-size:1.1rem;"><span id="modalBookRating"></span></div>
+      <a id="modalBookLink" href="#" target="_blank" style="display:inline-block;background:#4ade80;color:#fff;padding:0.5rem 1.5rem;border-radius:12px;text-decoration:none;font-weight:600;">📖 Read Now</a>
+    </div>
+  </div>
   <script>
-    function showDetails(title, author, genre, year, image, link) {
-      document.getElementById('bookDetailsModal').style.display = 'flex';
-      document.getElementById('modalBookTitle').textContent = title;
-      document.getElementById('modalBookAuthor').textContent = author;
-      document.getElementById('modalBookGenre').textContent = genre;
-      document.getElementById('modalBookYear').textContent = year;
-      document.getElementById('modalBookImage').src = image;
-      document.getElementById('modalBookLink').href = link;
+  // Book Modal Logic
+  function showBookModal(title, author, genre, year, image, rating, link) {
+    document.getElementById('modalBookImage').innerHTML = '<img src="'+image+'" alt="'+title+'" style="width:120px;height:160px;object-fit:cover;border-radius:12px;box-shadow:0 4px 20px rgba(255,107,157,0.15);">';
+    document.getElementById('modalBookTitle').textContent = title;
+    document.getElementById('modalBookAuthor').textContent = 'by ' + author;
+    document.getElementById('modalBookGenre').textContent = genre;
+    document.getElementById('modalBookYear').textContent = year;
+    document.getElementById('modalBookRating').textContent = '⭐ ' + rating;
+    document.getElementById('modalBookLink').href = link;
+    document.getElementById('bookDetailsModal').style.display = 'flex';
+  }
+  function closeBookModal() {
+    document.getElementById('bookDetailsModal').style.display = 'none';
+  }
+    const books = [
+      {
+        id: 1,
+        title: "Sweet Dreams",
+        author: "Luna Chan",
+        genre: "Romance",
+        year: 2023,
+        image: "/cute-pink-book-cover.png",
+        link: "https://example.com/sweet-dreams",
+        rating: 4.8,
+      },
+      {
+        id: 2,
+        title: "Ocean Tales",
+        author: "Miku Blue",
+        genre: "Fantasy",
+        year: 2022,
+        image: "/blue-ocean-fantasy-book.png",
+        link: "https://example.com/ocean-tales",
+        rating: 4.9,
+      },
+      {
+        id: 3,
+        title: "Sunny Days",
+        author: "Pom Pom",
+        genre: "Adventure",
+        year: 2024,
+        image: "/yellow-sunny-adventure-book.png",
+        link: "https://example.com/sunny-days",
+        rating: 4.7,
+      },
+      {
+        id: 4,
+        title: "Magical Forest",
+        author: "Sakura Hana",
+        genre: "Fantasy",
+        year: 2023,
+        image: "/green-magical-forest-book.png",
+        link: "https://example.com/magical-forest",
+        rating: 4.6,
+      },
+      {
+        id: 5,
+        title: "City Lights",
+        author: "Neon Star",
+        genre: "Romance",
+        year: 2021,
+        image: "/purple-city-lights-book.png",
+        link: "https://example.com/city-lights",
+        rating: 4.5,
+      },
+      {
+        id: 6,
+        title: "Cozy Café",
+        author: "Mocha Bean",
+        genre: "Slice of Life",
+        year: 2024,
+        image: "/cozy-brown-cafe-book.png",
+        link: "https://example.com/cozy-cafe",
+        rating: 4.8,
+      },
+    ];
+    function filterBooks() {
+      const searchTerm = document.getElementById('searchTerm').value.toLowerCase();
+      const genre = document.getElementById('genreSelect').value;
+      const year = document.getElementById('yearSelect').value;
+      const filtered = books.filter(book => {
+        const matchesSearch = book.title.toLowerCase().includes(searchTerm) || book.author.toLowerCase().includes(searchTerm);
+        const matchesGenre = genre === 'All' || book.genre === genre;
+        const matchesYear = year === 'All' || book.year.toString() === year;
+        return matchesSearch && matchesGenre && matchesYear;
+      });
+      renderBooks(filtered);
     }
-    function closeDetails() {
+    function renderBooks(filteredBooks) {
+      const grid = document.getElementById('booksGrid');
+      const noBooks = document.getElementById('noBooks');
+      const bookCount = document.getElementById('bookCount');
+      grid.innerHTML = '';
+      bookCount.textContent = filteredBooks.length;
+      if (filteredBooks.length === 0) {
+        noBooks.style.display = '';
+        return;
+      }
+      noBooks.style.display = 'none';
+      filteredBooks.forEach(book => {
+        const card = document.createElement('div');
+        card.className = 'book-card book-card-tiny';
+        card.onclick = () => showBookDetails(book.id);
+        card.innerHTML = `
+          <div class='book-cover-container'>
+            <img src='${book.image || "/placeholder.svg"}' alt='${book.title}' class='book-cover'>
+            <div class='book-overlay'>
+              <button class='view-details-button'>View Details</button>
+            </div>
+          </div>
+          <div class='book-info'>
+            <h3 class='book-title'>${book.title}</h3>
+            <p class='book-author'>by ${book.author}</p>
+            <span class='book-genre'>${book.genre}</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+    function showBookDetails(id) {
+      const book = books.find(b => b.id === id);
+      if (!book) return;
+      const modal = document.getElementById('bookDetailsModal');
+      modal.innerHTML = `
+        <div class='book-details-overlay' onclick='closeBookDetails()'>
+          <div class='book-details-modal' onclick='event.stopPropagation()'>
+            <button class='modal-close-btn' onclick='closeBookDetails()'>✕</button>
+            <div class='modal-content'>
+              <div class='modal-book-cover'>
+                <img src='${book.image || "/placeholder.svg"}' alt='${book.title}' />
+              </div>
+              <div class='modal-book-info'>
+                <div class='modal-header'>
+                  <h2 class='modal-title'>${book.title}</h2>
+                </div>
+                <div class='modal-author'>
+                  <span class='author-label'>✍️ Author:</span>
+                  <span class='author-name'>${book.author}</span>
+                </div>
+                <div class='modal-details'>
+                  <div class='detail-item'>
+                    <span class='detail-label'>� Genre:</span>
+                    <span class='detail-value'>${book.genre}</span>
+                  </div>
+                  <div class='detail-item'>
+                    <span class='detail-label'>� Published:</span>
+                    <span class='detail-value'>${book.year}</span>
+                  </div>
+                </div>
+                <div class='modal-actions'>
+                  <a href='${book.link}' target='_blank' rel='noopener noreferrer' class='read-now-btn'>📖 Read Now</a>
+                  <button class='close-modal-btn' onclick='closeBookDetails()'>Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      modal.style.display = '';
+    }
+    function closeBookDetails() {
       document.getElementById('bookDetailsModal').style.display = 'none';
     }
+    // Initial render
+    renderBooks(books);
   </script>
 </body>
 </html>

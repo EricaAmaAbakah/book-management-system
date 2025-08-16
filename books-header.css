@@ -1,0 +1,57 @@
+/* Cherub Library Header Bar Styles (from index.php) */
+body.books-header-bg .header {
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 4px 20px rgba(255, 107, 157, 0.1) !important;
+  padding: 1rem 2rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-bottom: 2px solid #ffb6c1 !important;
+}
+body.books-header-bg .logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+}
+body.books-header-bg .logo-icon {
+  font-size: 2rem !important;
+  background: linear-gradient(135deg, #ff69b4, #ff1493) !important;
+  border-radius: 50% !important;
+  padding: 0.5rem !important;
+  color: #fff !important;
+}
+body.books-header-bg .logo-text h1 {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  background: linear-gradient(135deg, #ff69b4, #ff1493, #da70d6) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+body.books-header-bg .logo-text p {
+  font-size: 0.8rem !important;
+  color: #b366d9 !important;
+  margin: 0 !important;
+}
+body.books-header-bg .nav {
+  display: flex !important;
+  gap: 1rem !important;
+}
+body.books-header-bg .nav-link {
+  padding: 0.5rem 1rem !important;
+  border-radius: 20px !important;
+  text-decoration: none !important;
+  color: #666 !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500 !important;
+}
+body.books-header-bg .nav-link.active,
+body.books-header-bg .nav-link:hover {
+  background: linear-gradient(45deg, #ff6bb3, #b366d9) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 179, 0.3) !important;
+}
+body.books-header-bg {
+  background: linear-gradient(135deg, #fce7f3 0%, #ddd6fe 25%, #bfdbfe 50%, #ccfbf1 75%, #fef3c7 100%) !important;
+}
