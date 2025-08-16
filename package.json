@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "book-managemnet-system",
   "version": "1.0.0",
   "description": "",
@@ -17,9 +18,22 @@
     "url": "https://github.com/EricaAmaAbakah/book-management-system/issues"
   },
   "homepage": "https://github.com/EricaAmaAbakah/book-management-system#readme",
-  "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.11"
+    "devDependencies": {
+      "autoprefixer": "^10.4.21",
+      "postcss": "^8.5.6",
+      "tailwindcss": "^4.1.11"
+    },
+    "dependencies": {
+      "@types/react": "^19.1.10",
+      "@types/react-dom": "^19.1.7",
+      "react": "^19.1.1",
+      "react-dom": "^19.1.1"
+    }
+  "dependencies": {
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+>>>>>>> ea54d96 (UI fixes: search bar and Add Book button placement, spacing, and hero section adjustments)
   }
 }

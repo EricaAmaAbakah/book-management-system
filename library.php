@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Magical Library - Cherub Library</title>
+    <link rel="stylesheet" href="styles/library.css">
+</head>
+<body>
+    <div class="library-page-container">
+        <header class="library-header-nav">
+            <div class="library-logo">
+                <div class="logo-icon">🌸</div>
+                <div class="logo-text">
+                    <h1>Cherub Library</h1>
+                    <p>Save books you love ♡</p>
+                </div>
+            </div>
+            <nav class="library-nav">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="books.php" class="nav-link">📚 Books</a>
+                <a href="account.html" class="nav-link">👤 Account</a>
+                <a href="#login" class="nav-link">🔑 Login</a>
+                <a href="#signup" class="nav-link">✨ Sign Up</a>
+            </nav>
+        </header>
+
+        <div class="library-hero">
+            <div class="floating-decorations">
+                <span class="float-icon">🎀</span>
+                <span class="float-icon">💖</span>
+                <span class="float-icon">🌟</span>
+                <span class="float-icon">🦋</span>
+                <span class="float-icon">🌸</span>
+            </div>
+            <h1 class="library-main-title">Your Magical Library ✨</h1>
+            <p class="library-subtitle">Discover wonderful stories in your kawaii collection</p>
+        </div>
+
+        <div class="library-controls">
+            <div class="search-section">
+                <div class="search-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Search by title or author..." class="library-search-input">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label class="filter-label">Genre</label>
+                    <select id="genreFilter" class="library-filter-select">
+                        <option value="All">All Genres</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Slice of Life">Slice of Life</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Year</label>
+                    <select id="yearFilter" class="library-filter-select">
+                        <option value="All">All Years</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="library-books-container">
+            <div id="booksGrid" class="library-books-grid">
+                <!-- Books will be populated by JavaScript -->
+            </div>
+
+            <div id="noResults" class="library-no-results" style="display: none;">
+                <div class="no-results-icon">📚</div>
+                <h3>No books found</h3>
+                <p>Try adjusting your search or filters</p>
+            </div>
+        </div>
+
+        <!-- Book Details Modal -->
+        <div id="bookModal" class="library-modal-overlay" style="display: none;">
+            <div class="library-modal compact-modal">
+                <button class="library-modal-close" onclick="closeBookModal()">✕</button>
+                <div class="library-modal-content">
+                    <div class="library-modal-image">
+                        <img id="modalImage" src="/placeholder.svg" alt="">
+                    </div>
+                    <div class="library-modal-details">
+                        <div id="viewMode">
+                            <h2 id="modalTitle" class="library-modal-title"></h2>
+                            <p id="modalAuthor" class="library-modal-author"></p>
+                            <div class="library-modal-meta">
+                                <span id="modalGenre" class="modal-genre-tag"></span>
+                                <span id="modalYear" class="modal-year-tag"></span>
+                                <div class="modal-rating">
+                                    <span class="stars">⭐</span>
+                                    <span id="modalRating"></span>
+                                </div>
+                            </div>
+                            <p id="modalDescription" class="library-modal-description"></p>
+                            <div class="modal-actions">
+                                <a id="modalReadLink" href="#" target="_blank" class="library-read-btn">Read Now ✨</a>
+                                <button onclick="startEditMode()" class="library-edit-btn">Edit Details ✏️</button>
+                            </div>
+                        </div>
+
+                        <div id="editMode" class="edit-form" style="display: none;">
+                            <div class="edit-image-section">
+                                <label class="edit-image-label">Book Cover</label>
+                                <div class="edit-image-upload">
+                                    <input type="file" accept="image/*" id="bookCoverUpload" class="edit-file-input">
+                                    <label for="bookCoverUpload" class="edit-upload-btn">📷 Upload Cover</label>
+                                    <div id="editImagePreview" class="edit-image-preview" style="display: none;">
+                                        <img id="previewImage" src="/placeholder.svg" alt="Preview">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" id="editTitle" class="edit-input edit-title" placeholder="Book title">
+                            <input type="text" id="editAuthor" class="edit-input edit-author" placeholder="Author name">
+                            <div class="edit-row">
+                                <select id="editGenre" class="edit-select">
+                                    <option value="Romance">Romance</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Mystery">Mystery</option>
+                                    <option value="Sci-Fi">Sci-Fi</option>
+                                    <option value="Adventure">Adventure</option>
+                                    <option value="Slice of Life">Slice of Life</option>
+                                </select>
+                                <input type="number" id="editYear" class="edit-input edit-year" min="1900" max="2024">
+                            </div>
+                            <input type="url" id="editLink" class="edit-input" placeholder="Book link">
+                            <textarea id="editDescription" class="edit-textarea" placeholder="Book description" rows="3"></textarea>
+                            <div class="edit-actions">
+                                <button onclick="saveBookEdit()" class="save-btn">Save Changes ✨</button>
+                                <button onclick="cancelEdit()" class="cancel-btn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/library.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Serenity Library</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Character Mascot -->
+        <div class="mascot-container">
+            <div class="mascot">
+                <div class="mascot-body">
+                    <div class="mascot-face">
+                        <div class="mascot-eyes">
+                            <div class="eye left-eye">
+                                <div class="pupil"></div>
+                            </div>
+                            <div class="eye right-eye">
+                                <div class="pupil"></div>
+                            </div>
+                        </div>
+                        <div class="mascot-blush left-blush"></div>
+                        <div class="mascot-blush right-blush"></div>
+                        <div class="mascot-mouth"></div>
+                    </div>
+                    <div class="mascot-ears">
+                        <div class="ear left-ear"></div>
+                        <div class="ear right-ear"></div>
+                    </div>
+                </div>
+                <div class="mascot-arms">
+                    <div class="arm left-arm"></div>
+                    <div class="arm right-arm"></div>
+                </div>
+                <div class="mascot-book">📖</div>
+                <div class="mascot-speech-bubble">
+                    <span>Happy Reading! ♡</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">🎓</div>
+                <div class="logo-text">
+                    <h1>Student Dashboard</h1>
+                    <p>Welcome back, Sakura! ♡</p>
+                </div>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="#" class="nav-link active">📚 My Books</a>
+                <a href="#" class="nav-link">📊 Progress</a>
+                <a href="index.html" class="nav-link">🚪 Logout</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">
+                        Your Reading
+                        <span class="highlight">Journey</span> 🌸
+                    </h2>
+                    <div class="progress-summary">
+                        <div class="progress-item">
+                            <span class="progress-icon">📚</span>
+                            <div>
+                                <strong>12</strong>
+                                <p>Books Read</p>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-icon">⏰</span>
+                            <div>
+                                <strong>48h</strong>
+                                <p>Reading Time</p>
+                            </div>
+                        </div>
+                        <div class="progress-item">
+                            <span class="progress-icon">🎯</span>
+                            <div>
+                                <strong>3</strong>
+                                <p>Goals Met</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Grid -->
+            <section class="content-grid">
+                <!-- Currently Reading -->
+                <div class="card">
+                    <h3>📖 Currently Reading</h3>
+                    <div class="current-book">
+                        <div class="book-cover-large pink">💕</div>
+                        <div class="book-details">
+                            <h4>Sweet Dreams Academy</h4>
+                            <p>by Luna Chan</p>
+                            <div class="reading-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                                <span>65% Complete</span>
+                            </div>
+                            <button class="btn-primary">Continue Reading 📚</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Books -->
+                <div class="card">
+                    <h3>💖 My Saved Books</h3>
+                    <div class="saved-books-grid">
+                        <div class="mini-book">
+                            <div class="mini-book-cover blue">💙</div>
+                            <span>Ocean Tales</span>
+                        </div>
+                        <div class="mini-book">
+                            <div class="mini-book-cover yellow">💛</div>
+                            <span>Sunny Days</span>
+                        </div>
+                        <div class="mini-book">
+                            <div class="mini-book-cover purple">💜</div>
+                            <span>Magic Stories</span>
+                        </div>
+                        <div class="mini-book">
+                            <div class="mini-book-cover green">💚</div>
+                            <span>Forest Tales</span>
+                        </div>
+                    </div>
+                    <button class="btn-secondary">View All Saved Books</button>
+                </div>
+
+                <!-- Reading Goals -->
+                <div class="card">
+                    <h3>🎯 Reading Goals</h3>
+                    <div class="goals-list">
+                        <div class="goal-item completed">
+                            <span class="goal-icon">✅</span>
+                            <div>
+                                <strong>Read 10 books this month</strong>
+                                <p>Completed! Great job! 🎉</p>
+                            </div>
+                        </div>
+                        <div class="goal-item active">
+                            <span class="goal-icon">🎯</span>
+                            <div>
+                                <strong>Finish 3 romance novels</strong>
+                                <p>2/3 completed</p>
+                                <div class="mini-progress">
+                                    <div class="mini-progress-fill" style="width: 66%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="goal-item">
+                            <span class="goal-icon">⭐</span>
+                            <div>
+                                <strong>Try a new genre</strong>
+                                <p>Not started yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="card">
+                    <h3>✨ Recommended for You</h3>
+                    <div class="recommendations">
+                        <div class="rec-book">
+                            <div class="rec-book-cover pink">🌸</div>
+                            <div class="rec-info">
+                                <h4>Cherry Blossom Dreams</h4>
+                                <p>Perfect for romance lovers!</p>
+                                <div class="rec-rating">⭐⭐⭐⭐⭐</div>
+                            </div>
+                            <button class="btn-heart">💕</button>
+                        </div>
+                        <div class="rec-book">
+                            <div class="rec-book-cover blue">🌊</div>
+                            <div class="rec-info">
+                                <h4>Midnight Ocean</h4>
+                                <p>Based on your reading history</p>
+                                <div class="rec-rating">⭐⭐⭐⭐⭐</div>
+                            </div>
+                            <button class="btn-heart">💕</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">© 2024 Serenity Library • Happy Reading, Sakura! 💖</span>
+                <div class="footer-icons">
+                    <span>🌸</span>
+                    <span>📚</span>
+                    <span>💕</span>
+                    <span>✨</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

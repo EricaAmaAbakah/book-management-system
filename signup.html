@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Sign Up - Kawaii Library 🌸</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -52,18 +53,110 @@
                         <button type="submit" class="btn btn-student">Create Account 🌸</button>
                     </form>
                     <div style="text-align: center; margin-top: 1.5rem;">
-                        <p style="color: #4682B4; font-weight: 500;">
-                            Already have an account?
-                            <a href="login.html" style="color: #FF1493; text-decoration: none; font-weight: 700;">Login here! 💖</a>
-                        </p>
-                        <p style="margin-top: 0.5rem;">
-                            <a href="#" style="color: #4682B4; text-decoration: underline; font-weight: 600;">Forgot password?</a>
-                        </p>
+                <a href="signup.html" class="nav-link active">✨ Sign Up</a>
+            </nav>
+        </header>
+
+         Main Content 
+        <main class="main-content">
+             Sign Up Form 
+            <section class="signup-section">
+                <div class="signup-container">
+                    <div class="signup-header">
+                        <h2 class="signup-title">
+                            Create Your
+                            <span class="highlight">Account</span> 🌸
+                        </h2>
+                        <p>Join thousands of book lovers in our kawaii library!</p>
                     </div>
+
+                    <form class="signup-form" onsubmit="handleSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">🌸 First Name</label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="Sakura">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">🌸 Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Chan">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">💌 Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="sakura@kawaii.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username">👤 Username</label>
+                            <input type="text" id="username" name="username" required placeholder="sakura_reader">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="password">🔒 Password</label>
+                                <input type="password" id="password" name="password" required placeholder="••••••••">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">🔒 Confirm Password</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="••••••••">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="favoriteGenre">📚 Favorite Genre</label>
+                            <select id="favoriteGenre" name="favoriteGenre" required>
+                                <option value="">Choose your favorite...</option>
+                                <option value="romance">💕 Romance</option>
+                                <option value="fantasy">🧚‍♀️ Fantasy</option>
+                                <option value="mystery">🔍 Mystery</option>
+                                <option value="scifi">🚀 Sci-Fi</option>
+                                <option value="horror">👻 Horror</option>
+                                <option value="comedy">😄 Comedy</option>
+                                <option value="drama">🎭 Drama</option>
+                                <option value="adventure">🗺️ Adventure</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span class="checkmark">✓</span>
+                                I agree to the <a href="#" class="terms-link">Terms & Conditions</a> 📋
+                            </label>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark">✓</span>
+                                Send me kawaii book recommendations! 💌
+                            </label>
+                        </div>
+
+                        <button type="submit" class="signup-btn">
+                            <span>Create My Account</span>
+                            <span class="btn-icon">🌸</span>
+                        </button>
+                    </form>
+
+                    <div class="signup-footer">
+                        <p>Already have an account? <a href="#" onclick="openLoginModal()" class="login-link">Login here! 🔑</a></p>
+                    </div>
+                </div>
+
+                 Decorative Elements 
+                <div class="signup-decoration">
+                    <div class="floating-book">📚</div>
+                    <div class="floating-heart">💕</div>
+                    <div class="floating-star">⭐</div>
+                    <div class="floating-flower">🌸</div>
+>>>>>>> ea54d96 (UI fixes: search bar and Add Book button placement, spacing, and hero section adjustments)
                 </div>
             </section>
         </main>
 
+<<<<<<< HEAD
         <!-- Floating Elements -->
         <div class="floating-elements">
             <div class="floating-star star-1">⭐</div>
@@ -74,5 +167,101 @@
     </div>
 
     <!-- JS removed for pure HTML/CSS version -->
+=======
+         Footer 
+        <footer class="footer">
+            <div class="footer-content">
+                <span class="footer-text">© 2024 Serenity Library • Welcome to our kawaii family! 💖</span>
+                <div class="footer-icons">
+                    <span>🌸</span>
+                    <span>✨</span>
+                    <span>📚</span>
+                    <span>💕</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+     Login Modal 
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🌸 Choose Your Login Type ♡</h2>
+                <span class="close" onclick="closeLoginModal()">&times;</span>
+            </div>
+            <div class="login-options">
+                <div class="login-option student-login" onclick="goToStudentDashboard()">
+                    <div class="login-icon">🎓</div>
+                    <h3>Student Login</h3>
+                    <p>Access your saved books and reading progress</p>
+                    <div class="kawaii-decoration">
+                        <span>📚</span>
+                        <span>💕</span>
+                        <span>✨</span>
+                    </div>
+                </div>
+                <div class="login-option admin-login" onclick="goToAdminDashboard()">
+                    <div class="login-icon">👑</div>
+                    <h3>Admin Login</h3>
+                    <p>Manage library resources and users</p>
+                    <div class="kawaii-decoration">
+                        <span>⚡</span>
+                        <span>🌟</span>
+                        <span>💎</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function goToStudentDashboard() {
+            window.location.href = 'student-dashboard.html';
+        }
+
+        function goToAdminDashboard() {
+            window.location.href = 'admin-dashboard.html';
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert('🚫 Passwords don\'t match! Please try again. 💕');
+                return;
+            }
+            
+            // Simulate successful signup
+            alert('🎉 Welcome to Serenity Library! Your account has been created successfully! 💖');
+            
+            // Redirect to student dashboard
+            setTimeout(() => {
+                window.location.href = 'student-dashboard.html';
+            }, 1000);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+>>>>>>> ea54d96 (UI fixes: search bar and Add Book button placement, spacing, and hero section adjustments)
 </body>
 </html>
